@@ -427,6 +427,128 @@ p {
   color: var(--muted);
   margin-top: 6px;
 }
+.locations-section {
+  position: relative;
+  overflow: hidden;
+  padding: 140px max(5%, calc((100vw - 1440px) / 2));
+  background:
+    radial-gradient(circle at 50% 52%, #0876c51a 0, transparent 46%),
+    #07131d;
+  color: white;
+  isolation: isolate;
+}
+.locations-inner {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+.locations-heading {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: end;
+  gap: 80px;
+  padding: 0 5%;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.locations-section.is-visible .locations-heading {
+  animation: locations-rise 850ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.locations-heading .eyebrow {
+  color: #65b9dc;
+}
+.locations-heading h2 {
+  font-size: clamp(48px, 5.6vw, 82px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -3.5px;
+}
+.locations-heading h2 span {
+  color: #78d8f3;
+  font-weight: 300;
+}
+.locations-heading > p {
+  max-width: 470px;
+  padding-bottom: 7px;
+  color: #9bafbd;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.locations-map-stage {
+  width: 100%;
+  margin: 70px auto 58px;
+  perspective: 1400px;
+}
+.locations-map {
+  --map-rotate-x: 0deg;
+  --map-rotate-y: 0deg;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: scale(0.97) rotateX(var(--map-rotate-x)) rotateY(var(--map-rotate-y));
+  transform-style: preserve-3d;
+  transition: transform 260ms ease-out;
+  will-change: transform;
+}
+.locations-section.is-visible .locations-map {
+  animation: locations-map-in 950ms 120ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.locations-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.locations-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  padding: 0 5%;
+}
+.locations-list article {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(22px);
+}
+.locations-section.is-visible .locations-list article {
+  animation: locations-rise 720ms calc(300ms + var(--location-index) * 90ms)
+    cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.location-dot {
+  width: 7px;
+  height: 7px;
+  margin-top: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #69dcff;
+  box-shadow: 0 0 13px #36c7ff;
+}
+.locations-list h3 {
+  margin-bottom: 7px;
+  color: #f2f8fb;
+  font-size: 15px;
+  font-weight: 500;
+}
+.locations-list p {
+  color: #758d9d;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+@keyframes locations-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes locations-map-in {
+  to {
+    opacity: 1;
+    transform: scale(1) rotateX(var(--map-rotate-x)) rotateY(var(--map-rotate-y));
+  }
+}
 .feature-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1293,6 +1415,21 @@ p {
   }
 }
 @media (max-width: 1100px) {
+  .locations-section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .locations-heading {
+    gap: 45px;
+  }
+  .locations-map-stage {
+    margin-top: 55px;
+    margin-bottom: 50px;
+  }
+  .locations-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 30px;
+  }
   .desktop-nav {
     gap: 19px;
   }
@@ -1352,6 +1489,42 @@ p {
   }
 }
 @media (max-width: 760px) {
+  .locations-section {
+    padding: 72px 0;
+  }
+  .locations-heading {
+    display: block;
+    padding: 0 7%;
+  }
+  .locations-heading h2 {
+    font-size: 46px;
+    letter-spacing: -2px;
+  }
+  .locations-heading > p {
+    margin-top: 26px;
+    padding: 0;
+    font-size: 13px;
+  }
+  .locations-map-stage {
+    margin: 42px auto 42px;
+    overflow: hidden;
+  }
+  .locations-map {
+    width: 100%;
+    transition: none;
+  }
+  .locations-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px 18px;
+    padding: 0 7%;
+  }
+  .locations-list h3 {
+    font-size: 13px;
+  }
+  .locations-list p {
+    font-size: 8px;
+    line-height: 1.5;
+  }
   .site-header {
     padding: 22px 6%;
   }
@@ -1735,6 +1908,12 @@ p {
   *:after {
     animation: none !important;
     transition: none !important;
+  }
+  .locations-heading,
+  .locations-map,
+  .locations-list article {
+    opacity: 1;
+    transform: none;
   }
 }
 

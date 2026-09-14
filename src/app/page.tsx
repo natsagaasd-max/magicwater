@@ -18,6 +18,7 @@ import {
   Plus,
 } from "lucide-react";
 import WaterScene from "@/components/water-scene";
+import ServiceLocations from "@/components/service-locations";
 import OrderDialog from "@/components/order-dialog";
 import { categories, money, type Product } from "@/lib/catalog";
 import { useDemoStore } from "@/lib/demo-store";
@@ -170,6 +171,7 @@ export default function Home() {
             </span>
           </div>
         </div>
+        <ServiceLocations />
         {aqua && (
           <section id="aqua4" className="feature-section">
             <div className="feature-visual aqua-visual">
