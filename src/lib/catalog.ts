@@ -24,6 +24,7 @@ export type Package = {
   label?: string;
   gift?: string;
   featured?: boolean;
+  productIds?: string[];
 };
 export const packages: Package[] = [
   {
@@ -35,6 +36,7 @@ export const packages: Package[] = [
     items: ["Ус шүүгч", "Жижиг цорго", "Агшин зуурын ус халаагч"],
     gift: "Шүршүүрийн шүүлтүүр 1ш",
     featured: true,
+    productIds: ["aqua4", "heater"],
   },
   {
     id: "shower",
@@ -42,6 +44,7 @@ export const packages: Package[] = [
     price: 65000,
     description: "Шүршүүрийн шүүлтүүрийн 1 жилийн хэрэглээ",
     items: ["Vitamin filter 1ш", "Энгийн filter 2ш"],
+    productIds: ["vitamin", "clzero"],
   },
   {
     id: "aqua4-alkaline",
@@ -53,8 +56,15 @@ export const packages: Package[] = [
       "Aqua 4 — 150,000₮",
       "Alkaline нэмэлт шүүлтүүр — 60,000₮",
     ],
+    productIds: ["aqua4"],
   },
 ];
+export const replacementFilters = [
+  { id: "sediment", position: "1-р шүүлтүүр", technicalName: "SEDIMENT", price: 30000 },
+  { id: "pre-carbon", position: "2-р шүүлтүүр", technicalName: "PRE CARBON", price: 33000 },
+  { id: "uf-membrane", position: "3-р шүүлтүүр", technicalName: "UF MEMBRANE", price: 35000 },
+  { id: "post-carbon", position: "4-р шүүлтүүр", technicalName: "POST CARBON", price: 33000 },
+] as const;
 export const initialProducts: Product[] = [
   {
     id: "aqua4",
@@ -113,6 +123,18 @@ export type Order = {
   note: string;
   status: (typeof statuses)[number];
   createdAt: string;
+  orderType?: "new_order" | "filter_replacement";
+  items?: OrderItem[];
+  subtotal?: number;
+  total?: number;
+};
+export type OrderItem = {
+  id: string;
+  name: string;
+  type: "product" | "package" | "filter";
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
 };
 export const money = (price: number | null) =>
   price === null

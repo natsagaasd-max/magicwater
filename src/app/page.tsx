@@ -21,7 +21,7 @@ import WaterScene from "@/components/water-scene";
 import ServiceLocations from "@/components/service-locations";
 import PackageSection from "@/components/package-section";
 import OrderDialog from "@/components/order-dialog";
-import { categories, money, type Package, type Product } from "@/lib/catalog";
+import { categories, money, replacementFilters, type Package, type Product } from "@/lib/catalog";
 import { useDemoStore } from "@/lib/demo-store";
 export default function Home() {
   const { products, addOrder } = useDemoStore();
@@ -350,15 +350,10 @@ export default function Home() {
               </span>
             </div>
             <div>
-              {[
-                ["SEDIMENT", "30,000"],
-                ["PRE CARBON", "33,000"],
-                ["UF MEMBRANE", "35,000"],
-                ["POST CARBON", "33,000"],
-              ].map(([name, price]) => (
-                <span key={name}>
-                  {name}
-                  <b>{price} ₮</b>
+              {replacementFilters.map((filter) => (
+                <span key={filter.id}>
+                  {filter.technicalName}
+                  <b>{money(filter.price)}</b>
                 </span>
               ))}
             </div>
@@ -447,6 +442,7 @@ export default function Home() {
       {selected && (
         <OrderDialog
           product={selected}
+          products={visible}
           onClose={() => setSelected(null)}
           onSave={addOrder}
         />
