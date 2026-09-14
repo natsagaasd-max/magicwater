@@ -19,8 +19,9 @@ import {
 } from "lucide-react";
 import WaterScene from "@/components/water-scene";
 import ServiceLocations from "@/components/service-locations";
+import PackageSection from "@/components/package-section";
 import OrderDialog from "@/components/order-dialog";
-import { categories, money, type Product } from "@/lib/catalog";
+import { categories, money, type Package, type Product } from "@/lib/catalog";
 import { useDemoStore } from "@/lib/demo-store";
 export default function Home() {
   const { products, addOrder } = useDemoStore();
@@ -285,6 +286,21 @@ export default function Home() {
               </button>
             ))}
           </div>
+          {category === "Багц" ? (
+            <PackageSection
+              onOrder={(packageData: Package) =>
+                setSelected({
+                  id: `package-${packageData.id}`,
+                  name: `${packageData.name} багц`,
+                  category: "Багц",
+                  description: packageData.description,
+                  image: "",
+                  price: packageData.price,
+                  visible: true,
+                })
+              }
+            />
+          ) : (
           <div className="product-grid">
             {visible
               .filter((p) => category === "Бүгд" || p.category === category)
@@ -319,13 +335,14 @@ export default function Home() {
                 </article>
               ))}
           </div>
-          {visible.filter((p) => category === "Бүгд" || p.category === category)
+          )}
+          {category !== "Багц" && visible.filter((p) => category === "Бүгд" || p.category === category)
             .length === 0 && (
             <p className="empty-state">
               Энэ ангилалд бүтээгдэхүүн одоогоор алга.
             </p>
           )}
-          <div className="replacement-filters">
+          {category !== "Багц" && <div className="replacement-filters">
             <div>
               <Droplets size={25} />
               <span>
@@ -348,7 +365,7 @@ export default function Home() {
             <a href="tel:95091085" aria-label="Солих шүүлтүүрийн талаар залгах">
               <ArrowUpRight />
             </a>
-          </div>
+          </div>}
         </section>
         <section className="section faq-section">
           <div>

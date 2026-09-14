@@ -12,6 +12,48 @@ export const categories = [
   "Ус цэвэршүүлэгч",
   "Ус халаагч",
   "Шүршүүрийн шүүлтүүр",
+  "Багц",
+];
+export type Package = {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  items: string[];
+  badge?: string;
+  label?: string;
+  gift?: string;
+  featured?: boolean;
+};
+export const packages: Package[] = [
+  {
+    id: "comfort",
+    name: "COMFORT",
+    price: 630000,
+    badge: "БЭЛЭГТЭЙ",
+    description: "Гэр ахуйн усны иж бүрэн шийдэл",
+    items: ["Ус шүүгч", "Жижиг цорго", "Агшин зуурын ус халаагч"],
+    gift: "Шүршүүрийн шүүлтүүр 1ш",
+    featured: true,
+  },
+  {
+    id: "shower",
+    name: "SHOWER",
+    price: 65000,
+    description: "Шүршүүрийн шүүлтүүрийн 1 жилийн хэрэглээ",
+    items: ["Vitamin filter 1ш", "Энгийн filter 2ш"],
+  },
+  {
+    id: "aqua4-alkaline",
+    name: "AQUA 4 ALKALINE",
+    price: 210000,
+    label: "ALKALINE",
+    description: "Aqua 4 + Alkaline нэмэлт шүүлтүүр",
+    items: [
+      "Aqua 4 — 150,000₮",
+      "Alkaline нэмэлт шүүлтүүр — 60,000₮",
+    ],
+  },
 ];
 export const initialProducts: Product[] = [
   {
