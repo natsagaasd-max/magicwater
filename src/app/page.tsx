@@ -34,6 +34,7 @@ export default function Home() {
   const heater = visible.find((p) => p.id === "heater");
   const links = [
     ["Бидний тухай", "#about"],
+    ["Үйлчилгээний байршил", "#locations"],
     ["Aqua 4", "#aqua4"],
     ["Ус халаагч", "#heater"],
     ["Бүтээгдэхүүн", "#products"],
