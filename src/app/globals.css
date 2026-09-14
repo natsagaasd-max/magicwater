@@ -560,16 +560,6 @@ p {
   min-height: 560px;
   background: #edf4f8;
 }
-.aqua-visual:before {
-  content: "";
-  position: absolute;
-  width: 70%;
-  height: 70%;
-  left: 15%;
-  top: 15%;
-  border: 1px solid #cddfe8;
-  border-radius: 50%;
-}
 .product-feature-image {
   object-fit: contain;
   padding: 65px 45px;
