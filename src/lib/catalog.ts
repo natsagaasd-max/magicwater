@@ -30,7 +30,7 @@ export const initialProducts: Product[] = [
     category: "Ус халаагч",
     description:
       "Хэрэгтэй мөч бүрт хүссэн температураар халуун усаа шууд аваарай. Гурван өнгөний сонголттой.",
-    image: "/images/imgImage2.png",
+    image: "/images/imgHeaterProductBlue.png",
     price: null,
     visible: true,
   },

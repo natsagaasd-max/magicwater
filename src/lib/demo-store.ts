@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { initialProducts, type Product, type Order } from "./catalog";
 const PRODUCTS = "magicwater.products.v1",
   ORDERS = "magicwater.orders.v1";
+const LEGACY_HEATER_IMAGE = "/images/imgImage2.png";
 function read<T>(key: string, fallback: T): T {
   try {
     const value = localStorage.getItem(key);
@@ -11,13 +12,20 @@ function read<T>(key: string, fallback: T): T {
     return fallback;
   }
 }
+function readProducts(): Product[] {
+  return read(PRODUCTS, initialProducts).map((product) =>
+    product.id === "heater" && product.image === LEGACY_HEATER_IMAGE
+      ? { ...product, image: "/images/imgHeaterProductBlue.png" }
+      : product,
+  );
+}
 export function useDemoStore() {
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [orders, setOrders] = useState<Order[]>([]);
   const [ready, setReady] = useState(false);
   useEffect(() => {
     const sync = () => {
-      setProducts(read(PRODUCTS, initialProducts));
+      setProducts(readProducts());
       setOrders(read(ORDERS, []));
       setReady(true);
     };
